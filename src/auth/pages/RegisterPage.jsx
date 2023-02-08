@@ -21,12 +21,12 @@ const formData = {
 };
 
 const formValidations = {
-  email: [(value) => value.includes("@"), "El correo debe de tener una @"],
+  email: [(value) => value.includes("@"), "The mail must have @"],
   password: [
     (value) => value.length >= 6,
-    "El password debe de tener más de 6 letras.",
+    "Use 6 or more characters",
   ],
-  displayName: [(value) => value.length >= 1, "El nombre es obligatorio."],
+  displayName: [(value) => value.length >= 1, "Required name."],
 };
 
 export const RegisterPage = () => {
@@ -61,7 +61,7 @@ export const RegisterPage = () => {
   };
 
   return (
-    <AuthLayout title="Crear cuenta">
+    <AuthLayout title="Create Account">
       <form
         onSubmit={onSubmit}
         className="animate__animated animate__fadeIn animate__faster"
@@ -69,9 +69,9 @@ export const RegisterPage = () => {
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label="Nombre completo"
+              label="Full name"
               type="text"
-              placeholder="Nombre completo"
+              placeholder="Full name"
               fullWidth
               name="displayName"
               value={displayName}
@@ -83,7 +83,7 @@ export const RegisterPage = () => {
 
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label="Correo"
+              label="Email"
               type="email"
               placeholder="correo@google.com"
               fullWidth
@@ -97,9 +97,9 @@ export const RegisterPage = () => {
 
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label="Contraseña"
+              label="Password"
               type="password"
-              placeholder="Contraseña"
+              placeholder="Password"
               fullWidth
               name="password"
               value={password}
@@ -121,15 +121,15 @@ export const RegisterPage = () => {
                 variant="contained"
                 fullWidth
               >
-                Crear cuenta
+                Create Account
               </Button>
             </Grid>
           </Grid>
 
           <Grid container direction="row" justifyContent="end">
-            <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
+            <Typography sx={{ mr: 1 }}> Already have an account ? </Typography>
             <Link component={RouterLink} color="inherit" to="/auth/login">
-              ingresar
+              Login
             </Link>
           </Grid>
         </Grid>
