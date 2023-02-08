@@ -12,6 +12,6 @@
 
 **Home Page**
 
-![Home page](src/img/homeApp.png)
+![Home page](src/img/home.png)
 
 
