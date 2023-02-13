@@ -1,9 +1,13 @@
+import { setDoc } from "firebase/firestore/lite";
+import { FirebaseDB } from "../../firebase/config";
 import {
   loginWithEmailPassword,
   registerUserWithEmailPassword,
   singInWithGoogle,
   logoutFirebase,
 } from "../../firebase/providers";
+import { loadNotes } from "../../helpers/loadNotes";
+import { setNotes, setSaving } from "../journal/journalSlice";
 import { checkingCredentials, logout, login } from "./";
 
 export const checkingAuthentication = () => {
@@ -61,3 +65,32 @@ export const startLogout = () => {
     dispatch(logout());
   };
 };
+
+
+export const startLoadingNotes = () => {
+
+  return async ( dispatch, getState ) => {
+    const  { uid } = getState().auth;
+    if ( !uid ) throw new Error ('El uid del usuario no existe');
+    
+    const notes = await loadNotes( uid );
+
+    dispatch( setNotes( notes))
+  }
+}
+
+export const startSaveNote = ( ) => {
+  return async( dispatch, getState ) => {
+
+    dispatch( setSaving());
+
+    const { uid } = getState().auth;
+    const { active: note } = getState().journal;
+
+    const noteToFirestore = { ...note };
+    delete noteToFirestore.id;
+
+    const docRef = doc( FirebaseDB, `${ uid }/journal/notes/${ note.id}`);
+    await setDoc( docRef, noteToFirestore, { merge: true } );
+  }
+}

@@ -19,14 +19,16 @@ import {
   startLoginWithEmailPassword,
 } from "../../store/auth";
 
+const formData = {
+  email: "",
+  password: "",
+};
+
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  const { email, password, onInputChange } = useForm({
-    email: "",
-    password: "",
-  });
+  const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
@@ -44,7 +46,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <AuthLayout title="Login" >
+      <AuthLayout title="Login">
         <form
           onSubmit={onSubmit}
           className="animate__animated animate__fadeIn animate__faster"
@@ -110,7 +112,7 @@ export const LoginPage = () => {
 
             <Grid container direction="row" justifyContent="end">
               <Link component={RouterLink} color="inherit" to="/auth/register">
-               New User ? Register with us
+                New User ? Register with us
               </Link>
             </Grid>
           </Grid>
