@@ -1,4 +1,5 @@
 # Journal-App
+**Deploy** : https://journalnotesapp.netlify.app/auth/login
 
 ## Prototype
 
